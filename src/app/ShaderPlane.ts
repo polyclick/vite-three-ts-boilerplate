@@ -1,15 +1,25 @@
-import { Mesh, PlaneGeometry, ShaderMaterial } from 'three'
+import { GLSL3, Mesh, PlaneGeometry, ShaderMaterial } from 'three'
 
-import DefaultVertexShaderGLSL from './shaders/DefaultVertexShader.glsl'
-import DefaultFragmentShaderGLSL from './shaders/DefaultFragmentShader.glsl'
+import DefaultVert from './shaders/DefaultVert.glsl'
+import DefaultFrag from './shaders/DefaultFrag.glsl'
+
 
 export default class ShaderPlane extends Mesh {
-  constructor() {
+
+  constructor(width: number, height: number) {
     super()
-    this.geometry = new PlaneGeometry(100, 100, 1, 1)
+
+    this.geometry = new PlaneGeometry(width, height, 1, 1)
     this.material = new ShaderMaterial({
-      vertexShader: DefaultVertexShaderGLSL,
-      fragmentShader: DefaultFragmentShaderGLSL,
+      vertexShader: DefaultVert,
+      fragmentShader: DefaultFrag,
+      glslVersion: GLSL3
     })
   }
+
+  updateSize(width: number, height: number) {
+    this.geometry.dispose()
+    this.geometry = new PlaneGeometry(width, height, 1, 1)
+  }
+
 }

@@ -1,6 +1,4 @@
-#ifdef GL_ES
-  precision highp float;
-#endif
+precision highp float;
 
 
 
@@ -8,9 +6,8 @@
 //// DECLARATIONS
 ///////////////////////////////////////////////////////////////////////////////
 
-varying vec2 v_texcoord;
-
-uniform float u_time;
+out vec3 vNormal;
+out vec2 vUv;
 
 
 
@@ -19,6 +16,8 @@ uniform float u_time;
 ///////////////////////////////////////////////////////////////////////////////
 
 void main() {
-  v_texcoord = uv;
+  vNormal = normalMatrix * normal;
+  vUv = uv;
+
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }

@@ -1,5 +1,5 @@
 import './style.css'
 
-import { App } from './app/App'
+import { App } from './app/AppOrtho'
 
 new App()

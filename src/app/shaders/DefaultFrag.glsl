@@ -1,6 +1,4 @@
-#ifdef GL_ES
-  precision highp float;
-#endif
+precision highp float;
 
 
 
@@ -11,14 +9,14 @@
 #include "./includes/common.glsl";
 
 
-
 ///////////////////////////////////////////////////////////////////////////////
 //// DECLARATIONS
 ///////////////////////////////////////////////////////////////////////////////
 
-varying vec2 v_texcoord;
+in vec3 vNormal;
+in vec2 vUv;
 
-uniform float u_time;
+out vec4 fragColor;
 
 
 
@@ -27,9 +25,9 @@ uniform float u_time;
 ///////////////////////////////////////////////////////////////////////////////
 
 void main() {
-  float red = triwave(v_texcoord.y * 10.0);
-  float green = triwave((v_texcoord.y + 0.15) * 10.0);
-  float blue = triwave((v_texcoord.y + 0.33) * 10.0);
+  float red = triwave(vUv.y * 10.0);
+  float green = triwave((vUv.y + 0.15) * 10.0);
+  float blue = triwave((vUv.y + 0.33) * 10.0);
 
-  gl_FragColor = vec4(red, green, blue, 1.0);
+  fragColor = vec4(red, green, blue, 1.0);
 }
